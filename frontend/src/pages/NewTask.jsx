@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios'; // ✅ Import Axios for backend requests
+import axios from 'axios';
 
 export default function NewTask({ onSave, existingTask, onCancel }) {
   const [title, setTitle] = useState('');
@@ -33,9 +33,9 @@ export default function NewTask({ onSave, existingTask, onCancel }) {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/tasks', newTask); // ✅ Send to backend
-      onSave(response.data); // ✅ Pass saved task to parent component
-      onCancel(); // ✅ Close modal after saving
+      const response = await axios.post('http://localhost:5000/api/tasks', newTask); 
+      onSave(response.data); 
+      onCancel(); 
     } catch (error) {
       console.error('❌ Error saving task:', error);
       alert('Failed to save task.');

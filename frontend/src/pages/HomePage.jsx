@@ -10,7 +10,6 @@ export default function HomePage() {
   const [editingTask, setEditingTask] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState("All");
 
-  // ✅ Fetch tasks from backend
   useEffect(() => {
     async function fetchData() {
       try {
@@ -23,7 +22,6 @@ export default function HomePage() {
     fetchData();
   }, []);
 
-  // ✅ Add Task to Database
   const handleAddTask = async (newTask) => {
     try {
       const addedTask = await createTask(newTask);
@@ -34,7 +32,6 @@ export default function HomePage() {
     }
   };
 
-  // ✅ Edit Task
   const handleEditTask = async (updatedTask) => {
     try {
       const editedTask = await updateTask(updatedTask._id, updatedTask);
@@ -47,7 +44,6 @@ export default function HomePage() {
     }
   };
 
-  // ✅ Delete Task from Database
   const handleDeleteTask = async (id) => {
     try {
       await deleteTask(id);
@@ -57,7 +53,6 @@ export default function HomePage() {
     }
   };
 
-  // ✅ Toggle Completed Status
   const handleToggleCompleted = async (id) => {
     try {
       const task = tasks.find(t => t._id === id);
@@ -73,7 +68,6 @@ export default function HomePage() {
     }
   };
 
-  // ✅ Filter tasks dynamically
   const filteredTasks = tasks.filter((task) => {
     if (selectedFilter === "All") return true;
     if (selectedFilter === "Completed") return task.completed;
@@ -94,7 +88,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Filter Bar */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "16px" }}>
         {["All", "Personal", "Work", "Urgent", "Completed", "Not Completed"].map(filter => (
           <button
@@ -114,7 +107,6 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Task List */}
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         {filteredTasks.length > 0 ? (
           filteredTasks.map(task => (
@@ -133,7 +125,6 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Add Task Button */}
       <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
         <button
           onClick={() => setShowModal(true)}
@@ -143,12 +134,10 @@ export default function HomePage() {
         </button>
       </div>
 
-      {/* TaskModal for Adding a New Task */}
       {showModal && (
         <TaskModal onSave={handleAddTask} onClose={() => setShowModal(false)} />
       )}
 
-      {/* TaskModal for Editing a Task */}
       {editingTask && (
         <TaskModal existingTask={editingTask} onSave={handleEditTask} onClose={() => setEditingTask(null)} />
       )}

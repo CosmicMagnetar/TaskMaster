@@ -6,7 +6,7 @@ export default function TaskCard({ task, onDelete, onEdit, onToggleCompleted }) 
 
   return (
     <div 
-      onClick={onToggleCompleted} // ✅ Clicking toggles completion
+      onClick={onToggleCompleted} 
       style={{ 
         background: task.completed ? "#D1FAE5" : "white",
         borderRadius: "16px",
@@ -18,18 +18,16 @@ export default function TaskCard({ task, onDelete, onEdit, onToggleCompleted }) 
         cursor: "pointer"
       }}
     >
-      {/* Completion Button */}
       <button 
         style={{ fontSize: "24px", border: "none", background: "transparent", cursor: "pointer" }} 
         onClick={(e) => {
-          e.stopPropagation(); // Prevent modal opening when clicking this
+          e.stopPropagation(); 
           onToggleCompleted();
         }}
       >
         {task.completed ? '✅' : '🧃'}
       </button>
 
-      {/* Task Title */}
       <div>
         <h3 style={{
           fontWeight: "bold",
@@ -44,12 +42,11 @@ export default function TaskCard({ task, onDelete, onEdit, onToggleCompleted }) 
         </div>
       </div>
 
-      {/* Buttons */}
       <div style={{ display: "flex", gap: "8px" }}>
         <button
           style={{ background: "#D1D1D1", padding: "8px", borderRadius: "8px", border: "none", cursor: "pointer" }}
           onClick={(e) => {
-            e.stopPropagation(); // Prevent toggle when opening modal
+            e.stopPropagation(); 
             setShowModal(true);
           }}
         >
@@ -58,7 +55,7 @@ export default function TaskCard({ task, onDelete, onEdit, onToggleCompleted }) 
         <button
           style={{ background: "#F4A3A3", padding: "8px", borderRadius: "8px", border: "none", cursor: "pointer" }}
           onClick={(e) => {
-            e.stopPropagation(); // Prevent toggle when deleting
+            e.stopPropagation(); 
             onDelete();
           }}
         >
@@ -66,7 +63,6 @@ export default function TaskCard({ task, onDelete, onEdit, onToggleCompleted }) 
         </button>
       </div>
 
-      {/* Edit Modal */}
       {showModal && (
         <TaskModal
           existingTask={task}
